@@ -1,0 +1,70 @@
+[
+  {
+    "name": "Database Management System",
+    "code": "DBMS",
+    "departmentCode": "CSE",
+    "semester": "5",
+    "modules": [
+      "Module 1",
+      "Module 2",
+      "Module 3",
+      "Module 4",
+      "Module 5"
+    ],
+    "createdAt": "2026-10-01T02:44:16.863414",
+    "_id": "7c94714b-2f62-43aa-bfa2-c4354837aa3a",
+    "id": "7c94714b-2f62-43aa-bfa2-c4354837aa3a",
+    "updatedAt": "2026-10-01T02:44:16.863994"
+  },
+  {
+    "name": "Operating Systems",
+    "code": "OS",
+    "departmentCode": "CSE",
+    "semester": "5",
+    "modules": [
+      "Module 1",
+      "Module 2",
+      "Module 3",
+      "Module 4",
+      "Module 5"
+    ],
+    "createdAt": "2026-10-01T02:44:16.866227",
+    "_id": "b2576361-4dc1-43a4-af21-7952bb8d1c4e",
+    "id": "b2576361-4dc1-43a4-af21-7952bb8d1c4e",
+    "updatedAt": "2026-10-01T02:44:16.866645"
+  },
+  {
+    "name": "Computer Networks",
+    "code": "CN",
+    "departmentCode": "CSE",
+    "semester": "5",
+    "modules": [
+      "Module 1",
+      "Module 2",
+      "Module 3",
+      "Module 4",
+      "Module 5"
+    ],
+    "createdAt": "2026-10-01T02:44:16.868387",
+    "_id": "87bec075-33bc-4fe0-a40f-a63b55ab56f8",
+    "id": "87bec075-33bc-4fe0-a40f-a63b55ab56f8",
+    "updatedAt": "2026-10-01T02:44:16.868803"
+  },
+  {
+    "name": "Software Engineering",
+    "code": "SE",
+    "departmentCode": "CSE",
+    "semester": "5",
+    "modules": [
+      "Module 1",
+      "Module 2",
+      "Module 3",
+      "Module 4",
+      "Module 5"
+    ],
+    "createdAt": "2026-10-01T02:44:16.870606",
+    "_id": "1c9d56a9-3c5a-4ab2-bd69-77fdc2b7f39a",
+    "id": "1c9d56a9-3c5a-4ab2-bd69-77fdc2b7f39a",
+    "updatedAt": "2026-10-01T02:44:16.871217"
+  }
+]

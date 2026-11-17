@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "seed-dbms-mod3-doc-1",
+    "name": "DBMS Module 3 - Normalization & BCNF",
+    "originalFileName": "DBMS_Module_3_Normalization_Notes.pdf",
+    "department": "CSE",
+    "semester": "5",
+    "subject": "DBMS",
+    "module": "Module 3",
+    "documentType": "Notes",
+    "academicYear": "2025-2026",
+    "description": "Comprehensive notes covering Functional Dependencies, 1NF, 2NF, 3NF, BCNF definitions and decomposition examples.",
+    "filePath": "./uploads\\seed_DBMS_Module_3_Normalization_Notes.pdf",
+    "status": "Processed",
+    "chunkCount": 5,
+    "uploadedBy": "Dr. Sarah Jenkins (Admin)",
+    "checksum": "b8fa996a6158b889e65ede65e5f44c74e4dbdbf49ce6ce51dce93620ad3055b0",
+    "createdAt": "2026-10-01T02:44:16.931869",
+    "updatedAt": "2026-10-01T02:44:17.187531",
+    "id": "seed-dbms-mod3-doc-1"
+  }
+]

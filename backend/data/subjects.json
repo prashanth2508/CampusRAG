@@ -1,0 +1,121 @@
+[
+  {
+    "name": "Database Management System",
+    "code": "DBMS",
+    "departmentCode": "CSE",
+    "semester": "5",
+    "modules": [
+      "Module 1",
+      "Module 2",
+      "Module 3",
+      "Module 4",
+      "Module 5"
+    ],
+    "createdAt": "2026-10-01T02:53:04.520269",
+    "_id": "887f2bc7-efb0-4a47-a1d5-96baf1f0e3c4",
+    "id": "887f2bc7-efb0-4a47-a1d5-96baf1f0e3c4",
+    "updatedAt": "2026-10-01T02:53:04.520848"
+  },
+  {
+    "name": "Operating Systems",
+    "code": "OS",
+    "departmentCode": "CSE",
+    "semester": "5",
+    "modules": [
+      "Module 1",
+      "Module 2",
+      "Module 3",
+      "Module 4",
+      "Module 5"
+    ],
+    "createdAt": "2026-10-01T02:53:04.523536",
+    "_id": "f4fbae1d-f5c0-4fe9-b012-dc3ae724b841",
+    "id": "f4fbae1d-f5c0-4fe9-b012-dc3ae724b841",
+    "updatedAt": "2026-10-01T02:53:04.524219"
+  },
+  {
+    "name": "Computer Networks",
+    "code": "CN",
+    "departmentCode": "CSE",
+    "semester": "5",
+    "modules": [
+      "Module 1",
+      "Module 2",
+      "Module 3",
+      "Module 4",
+      "Module 5"
+    ],
+    "createdAt": "2026-10-01T02:53:04.526756",
+    "_id": "5fbf6491-5e76-48ef-9324-a8f2bc1c126d",
+    "id": "5fbf6491-5e76-48ef-9324-a8f2bc1c126d",
+    "updatedAt": "2026-10-01T02:53:04.527348"
+  },
+  {
+    "name": "Software Engineering",
+    "code": "SE",
+    "departmentCode": "CSE",
+    "semester": "5",
+    "modules": [
+      "Module 1",
+      "Module 2",
+      "Module 3",
+      "Module 4",
+      "Module 5"
+    ],
+    "createdAt": "2026-10-01T02:53:04.529244",
+    "_id": "f57fa976-a417-45b9-805b-51a69bc1f4a8",
+    "id": "f57fa976-a417-45b9-805b-51a69bc1f4a8",
+    "updatedAt": "2026-10-01T02:53:04.529694"
+  },
+  {
+    "name": "Theory of Computation",
+    "code": "TOC",
+    "departmentCode": "CSE",
+    "semester": "5",
+    "modules": [
+      "Module 1: Finite Automata",
+      "Module 2: Regular Expressions & Languages",
+      "Module 3: Context-Free Grammars (CFG)",
+      "Module 4: Pushdown Automata (PDA)",
+      "Module 5: Turing Machines & Undecidability"
+    ],
+    "createdAt": "2026-10-02T10:00:00.000000",
+    "_id": "a1b2c3d4-toc1-5555-9999-theoryofcomp01",
+    "id": "a1b2c3d4-toc1-5555-9999-theoryofcomp01",
+    "updatedAt": "2026-10-02T10:00:00.000000"
+  },
+  {
+    "name": "Distributed Systems",
+    "code": "DS",
+    "departmentCode": "CSE",
+    "semester": "5",
+    "modules": [
+      "Module 1: Characterization & System Models",
+      "Module 2: Interprocess Communication & RPC",
+      "Module 3: Synchronization, Clocks & Election",
+      "Module 4: Replication & Consistency Protocols",
+      "Module 5: Fault Tolerance & Distributed File Systems"
+    ],
+    "createdAt": "2026-10-02T10:00:00.000000",
+    "_id": "b2c3d4e5-dist-5555-9999-distribsystem02",
+    "id": "b2c3d4e5-dist-5555-9999-distribsystem02",
+    "updatedAt": "2026-10-02T10:00:00.000000"
+  },
+  {
+    "name": "Research Methodology & IPR",
+    "code": "RM_IPR",
+    "departmentCode": "CSE",
+    "semester": "5",
+    "modules": [
+      "Module 1: Research Problem Formulation",
+      "Module 2: Literature Review & Experimental Design",
+      "Module 3: Data Sampling & Quantitative Modeling",
+      "Module 4: Intellectual Property Rights (IPR) Framework",
+      "Module 5: Patents, Copyrights, Trademarks & Ethics"
+    ],
+    "createdAt": "2026-10-02T10:00:00.000000",
+    "_id": "c3d4e5f6-rmip-5555-9999-researchmethipr03",
+    "id": "c3d4e5f6-rmip-5555-9999-researchmethipr03",
+    "updatedAt": "2026-10-02T10:00:00.000000"
+  }
+]

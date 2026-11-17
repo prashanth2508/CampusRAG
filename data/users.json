@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Dr. Sarah Jenkins (Admin)",
+    "email": "admin@campusrag.edu",
+    "passwordHash": "$2b$12$.sAAq1tKSlWmltXQvwoZ.ONJ6eTKGim3ll.suItuMSePllZTrbPSK",
+    "role": "admin",
+    "department": "CSE",
+    "semester": "5",
+    "createdAt": "2026-10-01T02:44:16.573684",
+    "_id": "08a29f2f-80c9-47e7-97d4-73cff6f73c07",
+    "id": "08a29f2f-80c9-47e7-97d4-73cff6f73c07",
+    "updatedAt": "2026-10-01T02:44:16.574810"
+  },
+  {
+    "name": "Alex Rivera (Student)",
+    "email": "student@campusrag.edu",
+    "passwordHash": "$2b$12$qRLPsBRyNeRQ4Bx/R9x90eVGugoh2AstV8wVs7WyQ9MxCIcfM.u.S",
+    "role": "student",
+    "department": "CSE",
+    "semester": "5",
+    "createdAt": "2026-10-01T02:44:16.840628",
+    "_id": "8ea9f6eb-cb2a-4e78-b4a7-ff5fcefe15b6",
+    "id": "8ea9f6eb-cb2a-4e78-b4a7-ff5fcefe15b6",
+    "updatedAt": "2026-10-01T02:44:16.841111"
+  }
+]

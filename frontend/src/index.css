@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Crisp Pure White Light Theme Tokens */
+  --paper: #ffffff;
+  --sidebar: #f8fafc;
+  --surface: #ffffff;
+  --ink: #0f172a;
+  --ink-soft: #64748b;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --moss: #6d8434;
+  --moss-dark: #576b27;
+  --on-moss: #ffffff;
+  --lime-soft: #f7fee7;
+  --pill-ink: #3b471c;
+  --dusk: #4861b5;
+  --night: #101c30;
+  --glass: rgba(255, 255, 255, 0.94);
+  --glass-card: #ffffff;
+  --muted: #f1f5f9;
+  --ok-bg: #ecfdf5;
+  --ok-fg: #047857;
+  --warn-bg: #fffbeb;
+  --warn-fg: #b45309;
+  --err-bg: #fef2f2;
+  --err-fg: #b91c1c;
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+.dark {
+  /* CourseIt Dark Theme Tokens */
+  --paper: #0e1311;
+  --sidebar: #121815;
+  --surface: #161d18;
+  --ink: #f1f3ea;
+  --ink-soft: #b3b7a3;
+  --line: rgba(241, 243, 234, 0.11);
+  --line-strong: rgba(241, 243, 234, 0.22);
+  --moss: #b8c460;
+  --moss-dark: #a6b24f;
+  --on-moss: #0f1611;
+  --lime-soft: #283117;
+  --pill-ink: #e4e9c6;
+  --dusk: #7d93e0;
+  --night: #0b1a33;
+  --glass: rgba(14, 19, 17, 0.85);
+  --glass-card: rgba(22, 29, 24, 0.92);
+  --muted: #1c231e;
+  --ok-bg: #24301a;
+  --ok-fg: #c9d57a;
+  --warn-bg: #3a2a18;
+  --warn-fg: #f0b47c;
+  --err-bg: #3a1e1a;
+  --err-fg: #f0a497;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  letter-spacing: -0.015em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* CourseIt Card Styles & Shadows */
+.courseit-card {
+  background-color: var(--surface);
+  box-shadow: 0 0 0 1px var(--line);
+  border-radius: 24px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.courseit-card:hover {
+  box-shadow: 0 30px 60px -30px rgba(22, 49, 92, 0.25), 0 0 0 1px var(--line-strong);
+}
+
+.dark .courseit-card:hover {
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--line-strong);
+}
+
+/* Floating Navbar Pill */
+.courseit-nav-pill {
+  background-color: var(--glass);
+  box-shadow: 0 0 0 1px var(--line), 0 20px 40px -24px rgba(22, 49, 92, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.dark .courseit-nav-pill {
+  box-shadow: 0 0 0 1px var(--line), 0 20px 40px -24px rgba(0, 0, 0, 0.6);
+}
+
+/* CourseIt Buttons */
+.btn-moss {
+  background-color: var(--moss);
+  color: var(--on-moss);
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-moss:hover {
+  background-color: var(--moss-dark);
+  transform: translateY(-1px);
+}
+
+.btn-moss:active {
+  transform: translateY(1px);
+}
+
+.badge-lime {
+  background-color: var(--lime-soft);
+  color: var(--pill-ink);
+  border-radius: 9999px;
+  font-weight: 500;
+}
+
+/* Subtle Inset Line Button */
+.btn-pill-outline {
+  box-shadow: inset 0 0 0 1px var(--line);
+  border-radius: 9999px;
+  color: var(--ink);
+  transition: all 0.18s ease;
+}
+
+.btn-pill-outline:hover {
+  background-color: var(--muted);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--line-strong);
+  border-radius: 9999px;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.05); }
+}
+
+.animate-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}

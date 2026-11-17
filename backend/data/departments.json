@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Computer Science & Engineering",
+    "code": "CSE",
+    "createdAt": "2026-10-01T02:53:04.501717",
+    "_id": "c85af8fb-041c-4d88-919c-bc1fc06682ee",
+    "id": "c85af8fb-041c-4d88-919c-bc1fc06682ee",
+    "updatedAt": "2026-10-01T02:53:04.502082"
+  },
+  {
+    "name": "Artificial Intelligence & Data Science",
+    "code": "AI & DS",
+    "createdAt": "2026-10-01T02:53:04.503708",
+    "_id": "2f7d8cca-4475-41e2-ae9c-93824ee63e9c",
+    "id": "2f7d8cca-4475-41e2-ae9c-93824ee63e9c",
+    "updatedAt": "2026-10-01T02:53:04.503989"
+  },
+  {
+    "name": "Computer Science & Business Systems",
+    "code": "CSBS",
+    "createdAt": "2026-10-01T02:53:04.505570",
+    "_id": "b0b3d57f-150b-49a9-8488-d93292a0ef0c",
+    "id": "b0b3d57f-150b-49a9-8488-d93292a0ef0c",
+    "updatedAt": "2026-10-01T02:53:04.505982"
+  },
+  {
+    "name": "Electronics & Communication Engineering",
+    "code": "ECE",
+    "createdAt": "2026-10-01T02:53:04.507960",
+    "_id": "f8141d1b-97ec-4c9a-ac13-2834a4b0ba27",
+    "id": "f8141d1b-97ec-4c9a-ac13-2834a4b0ba27",
+    "updatedAt": "2026-10-01T02:53:04.508344"
+  },
+  {
+    "name": "Electrical & Electronics Engineering",
+    "code": "EEE",
+    "createdAt": "2026-10-01T02:53:04.510833",
+    "_id": "de29d5b9-6a25-4cf4-84ed-483a0f959aeb",
+    "id": "de29d5b9-6a25-4cf4-84ed-483a0f959aeb",
+    "updatedAt": "2026-10-01T02:53:04.511263"
+  },
+  {
+    "name": "Mechanical Engineering",
+    "code": "Mechanical",
+    "createdAt": "2026-10-01T02:53:04.513330",
+    "_id": "2a9a9509-fd32-46af-9850-d543d65d01cc",
+    "id": "2a9a9509-fd32-46af-9850-d543d65d01cc",
+    "updatedAt": "2026-10-01T02:53:04.513808"
+  },
+  {
+    "name": "Civil Engineering",
+    "code": "Civil",
+    "createdAt": "2026-10-01T02:53:04.515745",
+    "_id": "73964e6b-94ad-4eba-b26b-e398735ee3f5",
+    "id": "73964e6b-94ad-4eba-b26b-e398735ee3f5",
+    "updatedAt": "2026-10-01T02:53:04.516285"
+  }
+]
