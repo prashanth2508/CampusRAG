@@ -120,15 +120,17 @@ class GeminiLLMProvider(LLMProvider):
     def __init__(self, api_key: str):
         self.api_key = api_key.strip()
         self.models_to_try = [
+            "gemini-flash-latest",
+            "gemini-2.5-flash-lite",
+            "gemini-pro-latest",
+            "gemini-flash-lite-latest",
+            "gemini-2.5-flash",
             "gemini-1.5-flash",
-            "gemini-1.5-flash-8b",
-            "gemini-2.0-flash",
-            "gemini-1.5-pro",
         ]
 
     def generate(self, prompt: str, system_prompt: str = SYSTEM_INSTRUCTION) -> str:
-        # Validate that the API key follows Google AI Studio format (starts with AIzaSy)
-        if not self.api_key.startswith("AIzaSy"):
+        # Validate that the API key is present
+        if not self.api_key or len(self.api_key) < 8:
             return LocalFallbackLLMProvider().generate(prompt, system_prompt)
 
         # Fast circuit breaker: if quota is exhausted, immediately serve from local engine
@@ -383,7 +385,8 @@ class LocalFallbackLLMProvider(LLMProvider):
 
             # Append clean diagram image link if doc_id available (without extra citation meta-text)
             if doc_id:
-                diagram_block += f"![Academic Diagram](http://localhost:8000/api/documents/{doc_id}/diagram/{page_num})\n\n"
+                backend_base = os.getenv("BACKEND_PUBLIC_URL", "https://campusrag-backend-x87x.onrender.com").rstrip("/")
+                diagram_block += f"![Academic Diagram]({backend_base}/api/documents/{doc_id}/diagram/{page_num})\n\n"
 
         # Build substantive content points
         points = []
@@ -610,7 +613,7 @@ class LLMFactory:
                 print(f"Failed to init OpenAI provider: {e}")
 
         # Check server Gemini key
-        if settings.GEMINI_API_KEY and settings.GEMINI_API_KEY.startswith("AIzaSy"):
+        if settings.GEMINI_API_KEY and len(settings.GEMINI_API_KEY) > 8:
             try:
                 return GeminiLLMProvider(settings.GEMINI_API_KEY)
             except Exception as e:
@@ -638,7 +641,8 @@ def format_rag_prompt(question: str, context: str, mode: str = "detailed") -> st
         page_match = re.search(r'Page:\s*(\d+)', context)
         doc_id = doc_id_match.group(1) if doc_id_match else None
         page_num = page_match.group(1) if page_match else "1"
-        img_tag = f"![Academic Diagram](http://localhost:8000/api/documents/{doc_id}/diagram/{page_num})" if doc_id else ""
+        backend_base = os.getenv("BACKEND_PUBLIC_URL", "https://campusrag-backend-x87x.onrender.com").rstrip("/")
+        img_tag = f"![Academic Diagram]({backend_base}/api/documents/{doc_id}/diagram/{page_num})" if doc_id else ""
         diagram_hint = f"\n\nDIAGRAM REQUIREMENT: The student explicitly requested an explanation WITH A DIAGRAM. You MUST generate an ASCII/Unicode flow diagram representing the phases described in the context, and include the official diagram image link: {img_tag}"
 
     prompt = f"""[MODE: {effective_mode}]{diagram_hint}

@@ -25,14 +25,15 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
     LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "gemini")  # "gemini" or "openai"
     
-    CHROMA_PERSIST_DIR: str = os.getenv("CHROMA_PERSIST_DIR", "./chroma_db")
-    UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", "./uploads")
-    DATA_DIR: str = os.getenv("DATA_DIR", "./data")
+    CHROMA_PERSIST_DIR: str = os.getenv("CHROMA_PERSIST_DIR", str(BASE_DIR / "chroma_db"))
+    UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", str(BASE_DIR / "uploads"))
+    DATA_DIR: str = os.getenv("DATA_DIR", str(BASE_DIR / "data"))
     
     TOP_K_RETRIEVAL: int = int(os.getenv("TOP_K_RETRIEVAL", "5"))
     ADMIN_REGISTRATION_SECRET: str = os.getenv("ADMIN_REGISTRATION_SECRET", "campusrag-admin-key-9988")
-    GOOGLE_CLIENT_ID: str = os.getenv("GOOGLE_CLIENT_ID", "")
+    GOOGLE_CLIENT_ID: str = os.getenv("GOOGLE_CLIENT_ID", "644095720788-r9g3vilicu1c4k3v2dp59e92gskte0qe.apps.googleusercontent.com")
     GOOGLE_CLIENT_SECRET: str = os.getenv("GOOGLE_CLIENT_SECRET", "")
+    BACKEND_PUBLIC_URL: str = os.getenv("BACKEND_PUBLIC_URL", "https://campusrag-backend-x87x.onrender.com")
 
     # Database Configuration (PostgreSQL / SQLite)
     SQL_DATABASE_URL: str = os.getenv("SQL_DATABASE_URL", "")

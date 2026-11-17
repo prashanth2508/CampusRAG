@@ -319,9 +319,9 @@ def google_login(payload: GoogleLoginRequest):
 
     # Determine user role
     role = "student"
-    if payload.role == "admin":
-        if payload.adminSecret and payload.adminSecret == settings.ADMIN_REGISTRATION_SECRET:
-            role = "admin"
+    admin_emails = ["admin@campusrag.edu", "chauhanprashanth588@gmail.com", "prashanthchavan78@gmail.com"]
+    if email in admin_emails or (payload.role == "admin" and payload.adminSecret == settings.ADMIN_REGISTRATION_SECRET):
+        role = "admin"
 
     # Search for existing user in database by email or googleId
     user = users_col.find_one({"email": email})
@@ -329,7 +329,7 @@ def google_login(payload: GoogleLoginRequest):
         user = users_col.find_one({"googleId": google_id})
 
     if user:
-        # Existing user: preserve their existing role (e.g. existing admin stays admin)
+        # Existing user: preserve or upgrade their role
         updates = {}
         if not user.get("googleId") and google_id:
             updates["googleId"] = google_id
@@ -337,8 +337,8 @@ def google_login(payload: GoogleLoginRequest):
             updates["avatarUrl"] = avatar_url
         if user.get("authProvider") != "google":
             updates["authProvider"] = "google"
-        # If user explicitly provided valid admin secret, upgrade role
-        if payload.role == "admin" and payload.adminSecret == settings.ADMIN_REGISTRATION_SECRET:
+        # If user is in admin list or provided valid admin secret, ensure role is admin
+        if email in admin_emails or (payload.role == "admin" and payload.adminSecret == settings.ADMIN_REGISTRATION_SECRET):
             updates["role"] = "admin"
             user["role"] = "admin"
         if updates:

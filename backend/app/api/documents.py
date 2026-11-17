@@ -224,15 +224,30 @@ def get_document(doc_id: str, current_user: dict = Depends(get_current_user)):
     return doc
 
 
+def resolve_file_path(stored_path: str) -> str:
+    """Normalize file path for cross-platform compatibility (Windows vs Linux)."""
+    if not stored_path:
+        return ""
+    norm = stored_path.replace("\\", "/")
+    if os.path.exists(norm):
+        return norm
+    filename = os.path.basename(norm)
+    candidate = os.path.join(settings.UPLOAD_DIR, filename)
+    if os.path.exists(candidate):
+        return candidate
+    return norm
+
+
 @router.get("/{doc_id}/view")
 def view_document_pdf(doc_id: str):
     docs_col = get_documents_col()
     doc = docs_col.find_one({"_id": doc_id})
-    if not doc or not os.path.exists(doc.get("filePath", "")):
+    file_path = resolve_file_path(doc.get("filePath", "")) if doc else ""
+    if not doc or not os.path.exists(file_path):
         raise HTTPException(status_code=404, detail="PDF file not found")
     safe_filename = doc.get("originalFileName", "document.pdf")
     return FileResponse(
-        doc["filePath"],
+        file_path,
         media_type="application/pdf",
         content_disposition_type="inline",
         headers={"Content-Disposition": f'inline; filename="{safe_filename}"'}
@@ -248,11 +263,12 @@ def get_document_diagram(doc_id: str, page_num: int, download: bool = False):
     """
     docs_col = get_documents_col()
     doc = docs_col.find_one({"_id": doc_id})
-    if not doc or not os.path.exists(doc.get("filePath", "")):
+    file_path = resolve_file_path(doc.get("filePath", "")) if doc else ""
+    if not doc or not os.path.exists(file_path):
         raise HTTPException(status_code=404, detail="PDF document not found")
 
     try:
-        pdf = fitz.open(doc["filePath"])
+        pdf = fitz.open(file_path)
         if page_num < 1 or page_num > len(pdf):
             raise HTTPException(status_code=400, detail="Page number out of bounds")
 
@@ -315,11 +331,12 @@ def get_document_page_image(doc_id: str, page_num: int):
     """Render full PDF page at 150 DPI as PNG image."""
     docs_col = get_documents_col()
     doc = docs_col.find_one({"_id": doc_id})
-    if not doc or not os.path.exists(doc.get("filePath", "")):
+    file_path = resolve_file_path(doc.get("filePath", "")) if doc else ""
+    if not doc or not os.path.exists(file_path):
         raise HTTPException(status_code=404, detail="PDF document not found")
 
     try:
-        pdf = fitz.open(doc["filePath"])
+        pdf = fitz.open(file_path)
         if page_num < 1 or page_num > len(pdf):
             raise HTTPException(status_code=400, detail="Page number out of bounds")
 
@@ -343,8 +360,9 @@ def reprocess_document(doc_id: str, background_tasks: BackgroundTasks, current_u
     if not doc:
         raise HTTPException(status_code=404, detail="Document not found")
 
+    file_path = resolve_file_path(doc.get("filePath", ""))
     vector_store_service.delete_document_chunks(doc_id)
-    background_tasks.add_task(process_document_background, doc_id, doc["filePath"], doc)
+    background_tasks.add_task(process_document_background, doc_id, file_path, doc)
     return {"message": "Document re-processing started in background."}
 
 
@@ -359,9 +377,10 @@ def delete_document(doc_id: str, current_user: dict = Depends(require_admin)):
     vector_store_service.delete_document_chunks(doc_id)
 
     # 2. Delete physical PDF file
-    if doc.get("filePath") and os.path.exists(doc["filePath"]):
+    file_path = resolve_file_path(doc.get("filePath", ""))
+    if file_path and os.path.exists(file_path):
         try:
-            os.remove(doc["filePath"])
+            os.remove(file_path)
         except Exception:
             pass
 
