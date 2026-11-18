@@ -50,25 +50,24 @@ const AcademicSelector = ({
         const res = await academicAPI.getSubjects(department, semester);
         if (res.data && res.data.length > 0) {
           setSubjects(res.data);
-          const exists = res.data.some(s => s.name === subject);
+          const exists = res.data.some(s => s.name === subject) || subject === 'All Subjects';
           if (!exists) {
-            setSubject(res.data[0].name);
-            if (res.data[0].modules && res.data[0].modules.length > 0) {
-              setModules(res.data[0].modules);
-            }
+            setSubject('All Subjects');
+            setModules(['All Modules', 'Module 1', 'Module 2', 'Module 3', 'Module 4', 'Module 5']);
+            setModule('All Modules');
           }
         } else {
           const fallbackList = [
+            { name: 'Theory of Computation', code: 'TOC' },
             { name: 'Database Management System', code: 'DBMS' },
-            { name: 'Operating Systems', code: 'OS' },
             { name: 'Computer Networks', code: 'CN' },
             { name: 'Software Engineering', code: 'SE' },
-            { name: 'Theory of Computation', code: 'TOC' },
             { name: 'Distributed Systems', code: 'DS' },
-            { name: 'Research Methodology & IPR', code: 'RM_IPR' }
+            { name: 'Research Methodology & IPR', code: 'RM_IPR' },
+            { name: 'Operating Systems', code: 'OS' }
           ];
           setSubjects(fallbackList);
-          if (!subject) setSubject('Database Management System');
+          if (!subject) setSubject('All Subjects');
         }
       } catch (err) {
         console.error("Failed to load subjects:", err);
@@ -80,10 +79,18 @@ const AcademicSelector = ({
   const handleSubjectChange = (e) => {
     const selectedSubjName = e.target.value;
     setSubject(selectedSubjName);
+    if (selectedSubjName === 'All Subjects') {
+      setModules(['All Modules', 'Module 1', 'Module 2', 'Module 3', 'Module 4', 'Module 5']);
+      setModule('All Modules');
+      return;
+    }
     const found = subjects.find(s => s.name === selectedSubjName);
-    if (found && found.modules) {
+    if (found && found.modules && found.modules.length > 0) {
       setModules(found.modules);
       setModule(found.modules[0] || 'Module 1');
+    } else {
+      setModules(['All Modules', 'Module 1', 'Module 2', 'Module 3', 'Module 4', 'Module 5']);
+      setModule('All Modules');
     }
   };
 
@@ -126,6 +133,7 @@ const AcademicSelector = ({
             onChange={handleSubjectChange}
             className="bg-transparent font-medium cursor-pointer outline-none text-xs truncate w-full"
           >
+            <option value="All Subjects">All Subjects</option>
             {subjects.map((s) => (
               <option key={s.id || s.code} value={s.name}>{s.code || s.name}</option>
             ))}
@@ -214,8 +222,9 @@ const AcademicSelector = ({
               onChange={handleSubjectChange}
               className="w-full appearance-none px-3.5 py-2.5 bg-[var(--surface)] border border-[var(--line-strong)] rounded-full text-xs font-medium text-[var(--ink)] outline-none hover:border-[#6d8434] transition-colors cursor-pointer truncate pr-8"
             >
+              <option value="All Subjects">All Subjects (Auto-Detect Across All Notes)</option>
               {subjects.map((s) => (
-                <option key={s.id || s.code} value={s.name}>{s.name}</option>
+                <option key={s.id || s.code} value={s.name}>{s.name} ({s.code})</option>
               ))}
             </select>
             <ChevronDown className="w-3.5 h-3.5 text-[var(--ink-soft)] absolute right-3.5 top-3.5 pointer-events-none" />

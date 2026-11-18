@@ -100,13 +100,13 @@ class VectorStoreService:
         filters_to_try = []
 
         conditions = []
-        if department and department != "All Departments":
+        if department and department not in ["All Departments", "all", "All"]:
             conditions.append({"department": str(department)})
-        if semester and semester != "All Semesters":
+        if semester and semester not in ["All Semesters", "all", "All"]:
             conditions.append({"semester": str(semester)})
-        if subject and subject != "All Subjects":
+        if subject and subject not in ["All Subjects", "all", "All"]:
             conditions.append({"subject": str(subject)})
-        if module and module != "All Modules":
+        if module and module not in ["All Modules", "all", "All"]:
             conditions.append({"module": str(module)})
 
         if len(conditions) == 1:
@@ -116,9 +116,9 @@ class VectorStoreService:
 
         # Relaxed department + semester filter
         dept_sem_conds = []
-        if department and department != "All Departments":
+        if department and department not in ["All Departments", "all", "All"]:
             dept_sem_conds.append({"department": str(department)})
-        if semester and semester != "All Semesters":
+        if semester and semester not in ["All Semesters", "all", "All"]:
             dept_sem_conds.append({"semester": str(semester)})
 
         if len(dept_sem_conds) == 1:
@@ -132,30 +132,44 @@ class VectorStoreService:
 
         for where_filter in filters_to_try:
             try:
-                results = self.collection.query(
-                    query_embeddings=[query_vector],
-                    n_results=top_k,
-                    where=where_filter,
-                    include=["documents", "metadatas", "distances"]
-                )
+                query_kwargs = {
+                    "n_results": top_k,
+                    "include": ["documents", "metadatas", "distances"]
+                }
+                if where_filter is not None:
+                    query_kwargs["where"] = where_filter
+
+                if getattr(embedding_service, "_mode", None) == "sentence_transformers" and getattr(embedding_service, "_st_model", None):
+                    query_kwargs["query_embeddings"] = [query_vector]
+                else:
+                    query_kwargs["query_texts"] = [query]
+
+                results = self.collection.query(**query_kwargs)
 
                 if results and results.get("documents") and len(results["documents"]) > 0 and len(results["documents"][0]) > 0:
                     docs = results["documents"][0]
                     metas = results["metadatas"][0]
                     dists = results.get("distances", [[]])[0]
 
+                    candidates = []
                     for i in range(len(docs)):
                         dist = dists[i] if i < len(dists) else 0.5
                         similarity = round(1.0 - dist, 4) if dist <= 1.0 else round(1.0 / (1.0 + dist), 4)
 
-                        retrieved_chunks.append({
+                        candidates.append({
                             "text": docs[i],
                             "metadata": metas[i],
                             "similarity_score": similarity
                         })
-                    
-                    # Found chunks! Break filter loop
-                    break
+
+                    best_sim = max((c["similarity_score"] for c in candidates), default=0.0)
+                    # If subject filter was applied but match quality is very low (< 0.20),
+                    # allow falling back to broader semester search so questions about other subjects succeed
+                    if best_sim >= 0.20 or where_filter is None:
+                        retrieved_chunks = candidates
+                        break
+                    elif not retrieved_chunks:
+                        retrieved_chunks = candidates
 
             except Exception as e:
                 print(f"ChromaDB search filter level failed ({e}), trying next filter level...")

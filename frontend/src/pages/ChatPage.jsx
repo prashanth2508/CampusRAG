@@ -42,8 +42,8 @@ const ChatPage = () => {
   // Context filters
   const [department, setDepartment] = useState('CSE');
   const [semester, setSemester] = useState('5');
-  const [subject, setSubject] = useState('Database Management System');
-  const [module, setModule] = useState('Module 3');
+  const [subject, setSubject] = useState('All Subjects');
+  const [module, setModule] = useState('All Modules');
   const [mode, setMode] = useState('detailed');
 
   // Copy & PDF Modal state
@@ -204,8 +204,8 @@ const ChatPage = () => {
         question: textToSend,
         department: deptToUse,
         semester: semToUse,
-        subject: subjToUse,
-        module: modToUse,
+        subject: subjToUse && subjToUse !== 'All Subjects' ? subjToUse : undefined,
+        module: modToUse && modToUse !== 'All Modules' ? modToUse : undefined,
         mode: modeToUse,
         chatId: currentChatId,
         geminiApiKey: savedGeminiKey || undefined
